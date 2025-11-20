@@ -6,14 +6,7 @@ import sys
 from pathlib import Path
 from typing import List
 
-# Read version from VERSION.txt
-_version_file = Path(__file__).parent.parent / "VERSION.txt"
-if _version_file.exists():
-    __version__ = _version_file.read_text().strip()
-else:
-    __version__ = "0.0.0"
-
-__license__ = "MIT"
+from .__about__ import __version__, __license__
 
 
 class Installer:

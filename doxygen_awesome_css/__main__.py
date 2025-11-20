@@ -2,10 +2,10 @@
 
 import argparse
 import logging
-import sys
 from pathlib import Path
 
-from . import Installer, __version__
+from . import Installer
+from .__about__ import __version__
 
 
 def setup_logging(verbose: bool = False, quiet: bool = False) -> None:

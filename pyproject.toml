@@ -24,7 +24,7 @@ Repository = "https://github.com/jothepro/doxygen-awesome-css.git"
 doxygen-awesome-css = "doxygen_awesome_css.__main__:main"
 
 [tool.hatch.version]
-path = "VERSION.txt"
+path = "doxygen_awesome_css/__about__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["doxygen_awesome_css"]
