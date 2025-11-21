@@ -17,33 +17,6 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build_sdist:
-    name: Build SDist
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: false
-
-    - uses: actions/setup-python@v4
-      with:
-        python-version: "3.x"
-
-#    - name: Ruff Check
-#      run: pipx run ruff check .
-
-    - name: Build SDist
-      run: pipx run build --sdist
-
-    - name: Check metadata
-      run: pipx run twine check dist/*
-
-    - uses: actions/upload-artifact@v4
-      with:
-        path: dist/*.tar.gz
-        overwrite: true
-
-
   build_wheels:
     name: Build universal wheels
     runs-on: ubuntu-latest
@@ -78,7 +51,7 @@ jobs:
 
   release:
     name: Release Assets and Upload to PyPI
-    needs: [build_wheels, build_sdist]
+    needs: [build_wheels]
     runs-on: ubuntu-latest
 
     steps:
