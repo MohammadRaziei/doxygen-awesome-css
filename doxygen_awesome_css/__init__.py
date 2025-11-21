@@ -14,7 +14,7 @@ class Installer:
 
     def __init__(self):
         self.logger = logging.getLogger(__name__)
-        self.package_dir = Path(__file__).parent.parent
+        self.package_dir = Path(__file__).parent
         self.files_to_copy = [
             "doxygen-awesome.css",
             "doxygen-awesome-darkmode-toggle.js",
@@ -40,8 +40,12 @@ class Installer:
     def install(self, target_dir: Path) -> None:
         """Install CSS/JS files to target directory."""
         if not target_dir.exists():
-            self.logger.error(f"Target directory '{target_dir}' does not exist")
-            sys.exit(1)
+            try:
+                target_dir.mkdir(parents=True, exist_ok=True)
+                self.logger.info(f"Successfully created directory '{target_dir}'")
+            except Exception as e:
+                self.logger.error(f"Failed to create directory '{target_dir}': {e}")
+                sys.exit(1)
 
         if not target_dir.is_dir():
             self.logger.error(f"'{target_dir}' is not a directory")
