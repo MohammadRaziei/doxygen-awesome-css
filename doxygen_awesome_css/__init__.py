@@ -15,6 +15,7 @@ class Installer:
     def __init__(self):
         self.logger = logging.getLogger(__name__)
         self.package_dir = Path(__file__).parent
+        self.project_root = self.package_dir.parent
         self.files_to_copy = [
             "doxygen-awesome.css",
             "doxygen-awesome-darkmode-toggle.js",
@@ -30,7 +31,10 @@ class Installer:
         """Get list of package files that exist."""
         package_files = []
         for filename in self.files_to_copy:
+            # Check inside package dir first, then project root
             file_path = self.package_dir / filename
+            if not file_path.exists():
+                file_path = self.project_root / filename
             if file_path.exists():
                 package_files.append(file_path)
             else:
