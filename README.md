@@ -140,6 +140,22 @@ python -m doxygen_awesome_css --version
 
 This method provides a clean way to manage the theme as a dependency and easily install the files where needed.
 
+### CMake Integration
+
+You can easily integrate the theme into your CMake-based Doxygen setup using `execute_process`:
+
+```cmake
+# Get the package path
+execute_process(
+    COMMAND ${Python3_EXECUTABLE} -m doxygen_awesome_css --path
+    OUTPUT_VARIABLE DOXYGEN_AWESOME_PATH
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+)
+
+# Set the CSS path for Doxygen
+set(DOXYGEN_HTML_EXTRA_STYLESHEET "${DOXYGEN_AWESOME_PATH}/doxygen-awesome.css")
+```
+
 ### System-wide
 
 You can even install the theme system-wide by running `make install`.
